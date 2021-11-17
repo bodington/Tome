@@ -8,25 +8,26 @@ long_description = open('README.md').read()
 version = '2.0.0'
 
 setup(
-	name='tome',    # This is the name of your PyPI-package.
-	description='Temperature optima for microorgianisms and enzymes',#package description
+    name='tome',    # This is the name of your PyPI-package.
+    description='Temperature optima for microorgianisms and enzymes',#package description
     long_description=long_description,
     version=version,                          # MAJOR.MINOR.PATCH
-	author='Gang Li',
-	author_email='gangl@chalmers.se',
-	url='https://github.com/EngqvistLab/Tome',
+    author='Gang Li',
+    author_email='gangl@chalmers.se',
+    url='https://github.com/EngqvistLab/Tome',
     packages=find_packages(exclude=['test*']), #find folders containing scripts, exclude irrelevant ones
-	# package_dir={'':'tome'},
-    install_requires=['pandas','Biopython','numpy','sklearn'],
+    # package_dir={'':'tome'},
+    install_requires=['pandas', 'Biopython', 'numpy', 'scipy', 'scikit-learn', 'sklearn', 'jinja2'],
     include_package_data=True,
     package_data={'tome':['data/train.csv',
-						  'model/OGT_svr.f',
-						  'model/OGT_svr.pkl',
-						  'external_data/brenda.sql',
-						  'external_data/cazy.sql']},
-	license='GPLv3+',
-	classifiers=[
-	# How mature is this project? Common values are
+                          'sequence_ogt_topt.csv',
+			  'model/OGT_svr.f',
+			  'model/OGT_svr.pkl',
+			  'external_data/brenda.sql',
+			  'external_data/cazy.sql']},
+    license='GPLv3+',
+    classifiers=[
+        # How mature is this project? Common values are
 	#   3 - Alpha
 	#   4 - Beta
 	#   5 - Production/Stable
@@ -51,7 +52,6 @@ setup(
     python_requires='>=2', #python version
     keywords='tome',
 
-	entry_points={
-        'console_scripts': ['tome = tome.tome:main']
-    }
+    entry_points={
+    'console_scripts': ['tome = tome.tome:main']}
 )

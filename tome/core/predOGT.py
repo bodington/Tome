@@ -20,7 +20,8 @@ import sys
 import os
 import pandas as pd
 from Bio import SeqIO
-from sklearn.externals import joblib
+import sklearn.externals
+import joblib
 from collections import Counter
 from multiprocessing import Pool, cpu_count
 import numpy as np
@@ -44,7 +45,7 @@ def parse_args():
     for i in range(len(sys.argv)):
         if 'tome' in sys.argv[i]:
             try:
-                if sys.argv[i+1] in ['predOGT','getEnzymes']:
+                if sys.argv[i+1] in ['predOGT','getEnzymes','predTopt']:
                     args['method'] = sys.argv[i+1]
             except: None
             break
@@ -177,27 +178,33 @@ def predict(fasta_file,model,means,stds,features,p):
 
     pred_ogt = model.predict(Xs)[0]
     return np.around(pred_ogt,decimals=2)
-
-
+    
 def main(args):
     infile = args.fasta
     indir = args.indir
 
-    outf = args.out
-
+    outfile = args.out
+    outogt = args.ogt
+    
     model, means, stds, features = load_model()
-    outf.write('FileName\tpredOGT (C)\n')
+
+
 
     if infile is not None:
         pred_ogt = predict(infile,model,means,stds,features,args.threads)
-        outf.write('{0}\t{1}\n'.format(infile.split('/')[-1], pred_ogt))
-
+        outfile.write('FileName\tpredOGT (C)\n')
+        outfile.write('{0}\t{1}\n'.format(infile.split('/')[-1], pred_ogt))
+        outogt.write('Sequence ID\tpredOGT (C)\n')
+        for rec in SeqIO.parse(infile,'fasta'):
+            outogt.write('{0}\t{1}\n'.format(str(rec.id), pred_ogt))
     elif indir is not None:
         for name in os.listdir(indir):
             if name.startswith('.'): continue
             if not name.endswith('.fasta'): continue
             pred_ogt = predict(os.path.join(indir,name),model,means,stds,features,args.threads)
-            outf.write('{0}\t{1}\n'.format(name, pred_ogt))
+            outfile.write('{0}\t{1}\n'.format(name, pred_ogt))
+            outfile.close()
+
     else: sys.exit('Please provide at least a fasta file or a directory that contains \
     a list of fasta files')
-    outf.close()
+    
