@@ -55,8 +55,9 @@ CAZy family) with/without a sequence (getEnzymes) A detailed list of options can
 --help'for predOGT or 'tome getEnzymes --help' for getEnzymes
 
 positional arguments:
-  {predOGT,getEnzymes}
+  {predOGT,getEnzymes,predTopt}
     predOGT             Predict the optimal growth temperature from proteomes
+    predTopt            Predict the optimal temperature of enzymes in a proteome
     getEnzymes          Get (homologue) enzymes for a given EC number of CAZy class with/without a sequence
 
 optional arguments:
@@ -238,6 +239,37 @@ Similar as for BRENDA, This will find all enzymes in CAZy database that (1) belo
 tome getEnzymes --database cazy --class_id GH1 --temp_range 50,60 --data_type Topt --outdir test/cazy_enzyme_with_seq/ --seq test/cazy_enzyme_with_seq/test.fasta
 ```
 Similar as for BRENDA, This will find all enzymes in CAZy database that (1) belongs to GH1 family, (2) have a predicted Topt between 50 and 60 °C, (3) homologous to the given sequence in `test.fasta`
+
+### 3. Prediction of optimal temperature for each enzyme
+Get help message of `tome predTopt` with 
+```
+tome predTopt -h
+```
+
+```
+usage: tome predTopt [-h] [--fasta] [--ogt] [-o]
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --fasta          a fasta file containing all protein sequence of a proteome.
+  --ogt            a file containing a list of all proteins in a proteome and the OGT of the organism.
+                   The first line/row of the text file must be a header and the OGT data must be in the last column.
+                   This file can be generated using the --ogt option of predOGT
+  -o , --out       out file name
+```
+
+#### Case 1.1 Prediction of optimal growth temperature for all enzymes in one microorganism
+```linux
+tome predTopt --fasta test/proteomes/pyrococcus_horikoshii.fasta --ogt test/proteomes/pyrococcus_horikoshii.ogt.list
+```
+Then you will get following results:<br/>
+```
+Optiumum Temperature Range: 80 - 100
+
+ID    Topt    Std err
+P43408	48.105 1.993092
+
+```
 
 
 
