@@ -31,14 +31,14 @@ pip install -e .
 There is a folder named 'test' in the package. One can use the instructions in
 'Usage' section to test the package.
 
-## Depedences
+## Depedencies
 * ncbi-blast-2.7.1+ (ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/)
 (This is only mandatory for 'tome predOGT -seq')
 * pandas
 * Biopython
 * numpy
-* sklearn
-* Pyhton 2.7 or Python 3
+* scikit-learn
+* Python 2.7 or Python 3
 
 
 ## Usage:
@@ -264,7 +264,7 @@ tome predTopt --fasta test/proteomes/pyrococcus_horikoshii.fasta --ogt test/prot
 ```
 Then you will get following results:<br/>
 ```
-Optiumum Temperature Range: 80 - 100
+Optiumum Temperature Range: 40 - 100
 
 ID    Topt    Std err
 P43408	48.105 1.993092
