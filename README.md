@@ -262,10 +262,10 @@ optional arguments:
 ```linux
 tome predTopt --fasta test/proteomes/pyrococcus_horikoshii.fasta --ogt test/proteomes/pyrococcus_horikoshii.ogt.list
 ```
-This will output a file listing the predicted optimal temperature for all enzymes in the fasta file with standard error, as specified in the tomer section below. The second line includes the max, min, range and standard error of predicted optimal temperatures within the organism.<br/>
+This will output a file listing the predicted optimal temperature for each enzyme in the fasta file, with standard error based on the learning model as specified in the tomer section below. The second line includes the max, min, range, standard deviation and standard error of predicted optimal temperatures for all enzymes within the organism.<br/>
 ```
-Filename	Topt Min	Topt Max	Topt Range	SE
-pyrococcus_horikoshii.fasta	56.685	96.955	40.269999999999996	4.503333564959797
+Filename	Topt Min	Topt Max	Topt Range Topt SD Topt SE
+pyrococcus_horikoshii.fasta	56.685	96.955	40.269999999999996	4.503333564959797 0.503333564959797
 
                                                 ID     Topt   Std err
  BAA29069 pep chromosome:ASM1110v1:Chromosome:1...     84.4   1.92934
