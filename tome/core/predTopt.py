@@ -210,7 +210,7 @@ def main(args):
             with open(outfile, 'w') as f:
                 dfAsString = pred_topt.to_string(header=True, index=False)
                 f.write('Filename\tTopt Min\tTopt Max\tTopt Range\tSD\tSE\n')
-                f.write('{0}\t{1}\t{2}\t{3}\t{4}\n\n'.format(args.fasta, pred_topt['Topt'].min(), pred_topt['Topt'].max(), pred_topt['Topt'].max() - pred_topt['Topt'].min(), pred_topt['Topt'].std, pred_topt['Topt'].sem()))
+                f.write('{0}\t{1}\t{2}\t{3}\t{4}\n\n'.format(args.fasta, pred_topt['Topt'].min(), pred_topt['Topt'].max(), pred_topt['Topt'].max() - pred_topt['Topt'].min(), pred_topt['Topt'].std(), pred_topt['Topt'].sem()))
                 f.write(dfAsString)
 
         else: sys.exit('Please provide a list with OGT values')
